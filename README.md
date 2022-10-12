@@ -36,6 +36,7 @@ Here's a walkthrough of implemented user stories:
 <img src='https://github.com/xSynergyx/twitter-clone/blob/master/Twitter.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 **Updated**
+
 <img src='https://github.com/xSynergyx/twitter-clone/blob/master/TwitterUpdated.gif' title='Updated Video Walkthrough' width='' alt='Updated Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
