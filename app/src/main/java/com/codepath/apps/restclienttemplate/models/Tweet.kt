@@ -11,7 +11,7 @@ data class Tweet (
 
     var body: String = "",
     var createdAt: String = "",
-    var user: @RawValue User? = null
+    var user: User? = null
 
 ) : Parcelable {
     companion object{

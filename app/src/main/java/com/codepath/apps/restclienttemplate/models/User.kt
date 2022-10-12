@@ -1,12 +1,16 @@
 package com.codepath.apps.restclienttemplate.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
 
-class User {
+@Parcelize
+data class User(
 
-    var name: String = ""
-    var screenName: String = ""
-    var publicImageUrl: String = ""
+    var name: String = "",
+    var screenName: String = "",
+    var publicImageUrl: String = "",
+) : Parcelable {
 
     // Something we can reference without creating a new instance of this user object
     companion object {
