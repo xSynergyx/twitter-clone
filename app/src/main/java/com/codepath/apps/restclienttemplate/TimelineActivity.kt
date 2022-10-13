@@ -1,13 +1,19 @@
 package com.codepath.apps.restclienttemplate
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.codepath.apps.restclienttemplate.models.Tweet
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import okhttp3.Headers
 import org.json.JSONException
 
@@ -31,6 +37,40 @@ class TimelineActivity : AppCompatActivity() {
             populateHomeTimeline()
         }
 
+        val composeFab = findViewById<FloatingActionButton>(R.id.compose_fab)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navbar)
+
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.bottom_nav_home -> {
+                    Toast.makeText(this, "Clicked on home", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.bottom_nav_search -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.bottom_nav_spaces -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.bottom_nav_notifications -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.bottom_nav_dm -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                else -> false
+            }
+        }
+
+        composeFab.setOnClickListener {
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
             android.R.color.holo_green_light,
             android.R.color.holo_orange_light,
@@ -43,6 +83,35 @@ class TimelineActivity : AppCompatActivity() {
         rvTweets.adapter = adapter
 
         populateHomeTimeline()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        /*
+        if (item.itemId == R.id.compose) {
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }*/
+        return super.onOptionsItemSelected(item)
+    }
+
+    // This method is called when we come back from ComposeActivity after sending tweet
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+
+            val tweet = data?.getParcelableExtra<Tweet>("tweet") as Tweet
+
+            tweets.add(0, tweet)
+            adapter.notifyDataSetChanged()
+            rvTweets.smoothScrollToPosition(0)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun populateHomeTimeline() {
@@ -71,13 +140,11 @@ class TimelineActivity : AppCompatActivity() {
             ) {
                 Log.i(TAG, "onFailure $response")
             }
-
-
-
         })
     }
 
     companion object {
-        val TAG = "TimelineActivity"
+        const val TAG = "TimelineActivity"
+        const val REQUEST_CODE = 10
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/bottom_nav_home"
+        android:icon="@drawable/ic_twitter_home" />
+
+    <item
+        android:title="Search"
+        android:id="@+id/bottom_nav_search"
+        android:icon="@drawable/ic_twitter_search" />
+
+    <item
+        android:title="Spaces"
+        android:id="@+id/bottom_nav_spaces"
+        android:icon="@drawable/ic_twitter_spaces" />
+
+    <item
+        android:title="Notifications"
+        android:id="@+id/bottom_nav_notifications"
+        android:icon="@drawable/ic_twitter_notifications" />
+
+    <item
+        android:title="Direct Messages"
+        android:id="@+id/bottom_nav_dm"
+        android:icon="@drawable/ic_twitter_dm" />
+
+</menu>
